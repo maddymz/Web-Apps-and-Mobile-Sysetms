@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head></head>
+<body>
+    <h5 id="homepage-message" style="text-align:center">Welcome {user} to QA Homepage</h5>
+    <h4 style="text-align:center">Hello {username} , you are logged in as {role}</h4>
+
+<form action = "/" method="POST" style ="text-align: end">
+    <input  type="submit" id="login" name="logout" value="Logout">
+</form>
+
+<form action = "/" method="POST">
+    <label for="username">Author</label>
+    <input type="text" placeholder="Author" name="author">
+    <label for="username">TAgs</label>
+    <input type="text" placeholder="Tags" name="tags">
+    <label for="Instructor">Start Date</label>
+    <input type="Date" id="startdate" name="sdate">
+    <label for="student">End Date</label>
+    <input type="Date" id="endDate" name="edate" >
+    <input type="submit" id="serach" name="Search" value="search">
+</form>
+
+<div>
+    <ul>
+        <li>{item}</li>
+    </ul>
+</div>
+</body>

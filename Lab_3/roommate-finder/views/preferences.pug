@@ -1,0 +1,20 @@
+doctype html
+head
+    title= "preferences"
+    link(rel="stylesheet", href='/stylesheets/style.css')
+body
+    block content
+    h1= "This is set prefernces page!" + quesid
+    div
+        form(action="/questions/"+(quesid) method="POST")
+            input(type="radio" name="horizontal")
+            | Horizonatal
+            br
+            input(type="radio" name="vertical")
+            | Vertical
+            br
+            br
+            input(type="submit" value="OK" )
+    br
+    div
+        a(href="/") Go to main page

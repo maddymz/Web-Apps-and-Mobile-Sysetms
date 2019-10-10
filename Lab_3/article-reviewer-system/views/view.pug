@@ -1,0 +1,12 @@
+doctype html
+html
+    head
+        title = "User Activity"
+        link(rel='stylesheet', href='/stylesheets/style.css')
+
+    body
+        block content
+        h1= "USER ACTIVITY"
+        ol
+            each val in activity
+                li= val

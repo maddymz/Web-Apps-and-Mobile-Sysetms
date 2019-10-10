@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+    div
+      form()
+        input(type="text" name="username" placeholder="Username")
+        input(type="submit" name="match" value="match" formaction="/questions/1" formmethod="POST")
+

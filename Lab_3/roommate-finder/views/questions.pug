@@ -1,0 +1,37 @@
+doctype html
+head
+    title= "Questions"
+    link(rel="stylesheet", href="/stylesheets/style.css")
+body
+    block content
+    h1= "This is questions page!"
+    div
+        form()
+            p #{question.ques}
+            a(href="/preferences/"+ question.q_no) Set you answer rendering preference
+            br
+            if prefh
+                each val in question.options
+                    input(type="radio" name= val)
+                    | #{val}
+            else if prefv
+                each val in question.options
+                    input(type="radio" name= val)
+                    | #{val}
+                    br
+            else 
+                each val in question.options
+                    input(type="radio" name= val)
+                    | #{val}
+                    br
+            br
+            br
+            if question.q_no == 1
+                input(type="submit" name="next" value="Next" formaction="/questions/"+(question.q_no + 1)  formmethod="Post")
+            else
+                input(type="submit" name="prev" value="Prev" formaction="/questions/"+(question.q_no - 1) formmethod="post")
+                input(type="submit" name="next" value="Next" formaction="/questions/"+(question.q_no + 1)  formmethod="Post")
+    br
+    div
+
+        a(href="/") Go to main page

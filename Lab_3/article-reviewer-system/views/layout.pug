@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/stylesheets/homepage.css")
+  body
+    block content
+    div
+      p #{articleContent}
+
+    div(class="form")
+      form()
+          div
+            strong User Activity 
+            br
+            input(type="submit" name="View User Activity " value="View User Activity" formaction='/view' formmethod = 'GET')
+            input(type="submit" name="Reset" value="Reset" formaction='/reset' formmethod= 'GET')
+            br
+            br
+          div
+
+            strong Add a comment
+            br
+            | Comment Id: 
+            input(type="text" name="commentId" )
+            br
+            | Comments: 
+            input(type="text" name="comments")
+            br
+            input(type="submit" name="addComment" value="Add" formaction='/add' formmethod = 'POST')
+            br 
+            input(type="submit" name="Undo" value="Undo" formaction ='/undo' formmethod = 'POST')
+            br
+            br
+          div
+            strong Comments
+            ul
+              each val in showcomments
+                p ID #{val.id} : #{li= val.comment}
+            br
+          div
+
+            strong Delete a comment
+            br
+            | Comment Id: 
+            br
+            input(type="text" name="deleteId")
+            br
+            input(type="submit" name="delComment" value="Delete" formaction='/delete' formmethod = 'POST') 
+            br 
+          

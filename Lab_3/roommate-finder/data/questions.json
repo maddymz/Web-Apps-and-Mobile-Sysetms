@@ -1,0 +1,38 @@
+{
+    "questions": [{
+        "q_no": 1,
+        "ques": "Do you share food or label it?",
+        "options": [
+            "Label",
+            "Share"
+        ]
+    }, {
+        "q_no": 2,
+        "ques": "Do you cook?",
+        "options": [
+             "Yes",
+             "No"
+    ]
+    }, {
+        "q_no": 3,
+        "ques": "Do you prefer to shop/cook/eat together?",
+        "options": [
+             "Yes",
+             "No"
+    ]
+    }, {
+        "q_no": 4,
+        "ques": "If someone breaks/borrows/loses something while one of us isn’t here who is responsible to pay?",
+        "options": [
+             "Both",
+             "The one who breaks"
+        ]
+    },  {
+        "q_no": 5,
+        "ques": "Do you share condiments/paper products/cleaning products, etc.?",
+        "options": [
+             "Yes",
+             "No"
+        ]
+    }]
+}

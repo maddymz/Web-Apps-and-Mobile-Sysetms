@@ -1,0 +1,43 @@
+[{
+	"question": "How do I write Unit Tests?",
+	"answer": "You should know this by now",
+	"tags": "unit test, whitebox, blackbox",
+	"author": "Ruben",
+	"date": "2019-09-06T04:17:36.814Z",
+	"id": 1567311456814.3071
+}, {
+	"question": "When is the due date of assignment 1?",
+	"answer": "September 9th, 11:59pm",
+	"tags": "due date, assignment 1",
+	"author": "Dr.M",
+	"date": "2019-09-01T04:17:56.931Z",
+	"id": 1567311476931.9548
+}, {
+	"question": "When is the due date of assignment 2?",
+	"answer": "September 23th, 11:59pm",
+	"tags": "hallo",
+	"author": "Dr.H",
+	"date": "2019-08-20T04:18:11.853Z",
+	"id": 1567311491853.5676
+}, {
+	"question": "Where do I submit assign 4?",
+	"answer": "On Canvas under assign 4. ",
+	"tags": "assign 4, submission",
+	"author": "Dr.M",
+	"date": "2019-08-31T04:18:47.454Z",
+	"id": 1567311527454.1174
+}, {
+	"question": "How do I implement xyz?",
+	"answer": "Very carefully.",
+	"tags": "implement, xyz",
+	"author": "Dr.G",
+	"date": "2019-07-10T04:18:55.079Z",
+	"id": 1567311535079.3115
+}, {
+	"question": "How do I create a Server in JavasScript?",
+	"answer": "Check the examples in GitHub. ",
+	"tags": "server, assign 2, java script",
+	"author": "Dr.G",
+	"date": "2019-09-07T01:41:53.853Z",
+	"id": 1567820513853.8557
+}]
