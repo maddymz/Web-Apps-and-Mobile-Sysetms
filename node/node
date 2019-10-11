@@ -1,9 +1,0 @@
-node
-.load lab1act2partA.js
-.load lab1act2partA_test.js
-
-.load lab1act2partB.js
-.load lab1act2partB_test.js
-
-.load lab1act2partC.js
-.load lab1act2partC_test.js
