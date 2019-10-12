@@ -1,0 +1,17 @@
+doctype html
+head
+    title = "Registration"
+    link(rel="stylesheet", href='/stylesheets/style.css')
+body 
+    block content
+    h1= "Enter the following credentials to register yourself"
+    form()
+        input(type="text" name="username" placeholder = "Username")
+        br
+        br
+        input(type="password" name="password" placeholder = "Password")
+        br
+        br
+        input(type="submit" value="Register" name= "Register" formmethod="POST" formaction = "/register")
+    br
+    

@@ -1,0 +1,36 @@
+doctype html
+head
+    title= "Edit Questions"
+    link(rel="stylesheet", href='/stylesheets/style.css')
+body
+    block content
+    h1= "Edit Questions!" 
+    each val in questions
+        ul
+            p #{val.q_no} . #{val.ques}
+    form()        
+        | Add questions: 
+        br
+        | Question ID: 
+        input(type="text" name="quesId")
+        br
+        | Question: 
+        input(type="text" name="newQues")
+        br
+        | Answer Options:
+        input(type="text" name="options" placeholder="option1, option2..etc")
+        br
+        input(type="submit" name="addQues" value="ADD" formaction = "/add" formmethod= "Post" )
+        br
+        br
+        | Remove questions: 
+        br
+        | Question id:
+        input(type="text" name="delquesId")
+        br
+        input(type="submit" name="delQues" value ="Delete" formaction='/delete' formmethod="Post")
+        br
+        br
+        a(href="/") logout
+
+    

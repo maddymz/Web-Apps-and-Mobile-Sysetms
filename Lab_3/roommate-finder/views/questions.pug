@@ -12,18 +12,32 @@ body
             br
             if prefh
                 each val in question.options
-                    input(type="radio" name= val)
-                    | #{val}
+                    if answer && answer.ans == val
+                        input(type="radio" name= val checked)
+                        | #{val}
+                    else
+                        input(type="radio" name= val )
+                        | #{val}
             else if prefv
                 each val in question.options
-                    input(type="radio" name= val)
-                    | #{val}
-                    br
+                    if answer && answer.ans == val
+                        input(type="radio" name= val checked)
+                        | #{val}
+                        br
+                    else
+                        input(type="radio" name= val )
+                        | #{val}
+                        br
             else 
                 each val in question.options
-                    input(type="radio" name= val)
-                    | #{val}
-                    br
+                    if answer && answer.ans == val
+                        input(type="radio" name= val checked)
+                        | #{val}
+                        br
+                    else
+                        input(type="radio" name= val )
+                        | #{val}
+                        br
             br
             br
             if question.q_no == 1

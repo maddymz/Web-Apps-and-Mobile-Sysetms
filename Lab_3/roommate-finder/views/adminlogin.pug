@@ -1,0 +1,19 @@
+doctype html
+head
+    title= "Admin login"
+    link(rel="stylesheet", href='/stylesheets/style.css')
+body
+    block content
+    h1= "Welcome to admin page!" 
+    form()
+        | Username
+        input(type="text" name="username" placeholder = "Username")
+        br
+        | Password
+        input(type="password" name="password" placeholder = "Password")
+        br
+        input(type="submit" value="login" formmethod="POST" formaction = "/editquestions")
+    br
+    a(href="/register") new user? click to register
+
+    
