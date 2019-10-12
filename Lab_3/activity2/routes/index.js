@@ -194,6 +194,7 @@ router.all('/adminlogin', function(req, res, next){
 });
 
 router.all('/editquestions', function(req, res, next){
+  console.log("inside addmore", req.body);
   MongoClient.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -212,7 +213,7 @@ router.all('/editquestions', function(req, res, next){
             }
           }
         }
-        if(validUser){
+        if(validUser || 'addMore' in req.body || 'delMore' in req.body){
           fs.readFile('./data/questions.json', 'utf8', function(err, filedata){
             var ques = JSON.parse(filedata);
         
@@ -220,7 +221,7 @@ router.all('/editquestions', function(req, res, next){
            
             res.render('editquestions', {questions: ques.questions});
           });
-        } else {
+        } else{
           res.render('error', {message: "Please enter correct credentials", error: {status: 'Unauthorized User', stack: ""}});
         }
         db.close();

@@ -5,4 +5,5 @@ head
 body 
     block content
     h1= "Delete operation completed"
-    a(href="/editquestions") Go to edit page
+    form(action="/editquestions" method ='post')
+        input(type="submit" name="delMore" value="deleteMore")

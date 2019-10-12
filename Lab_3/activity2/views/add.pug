@@ -5,4 +5,7 @@ head
 body 
     block content
     h1= "Add operation completed"
-    a(href="/editquestions") Go to edit page
+    br
+    form(action="/editquestions" method ='post')
+        input(type="submit" name="addMore" value="addMore")
+    
