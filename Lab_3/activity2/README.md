@@ -8,7 +8,9 @@ C2:
 To validate user for adding questions, i am checking the user against valid credentials.
 
 User should be admin, for which valid credentials are :
+
 Username: admin
+
 Password: admin
 
 In case of new user, user needs to register, and then when login next time validated against teh registered credentials.
