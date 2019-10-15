@@ -1,4 +1,4 @@
-# To run teh application 
+# To run the application 
 ``` npm start ```
 
 # Activity 2
