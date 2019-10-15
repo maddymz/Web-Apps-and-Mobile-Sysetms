@@ -1,4 +1,22 @@
+# To build 
+``` npm start ```
+
 # Activity 2
+Used Mongo DB as persistence store 
+
+Connection url: mongodb://localhost:27017/
+
+Application creates " answers" database.
+
+answers has 3 collections:
+
+session: to store session data
+
+credentials: to store admin credentials, used to authorize
+
+userAnswers: stores responses of questions of each user
+
+session: to store user session information
 
 # Activity 3
 
