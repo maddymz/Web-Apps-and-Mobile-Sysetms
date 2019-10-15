@@ -4,5 +4,9 @@ head
     link(rel="stylesheet", href='/stylesheets/style.css')
 body
     block content
-    h1= "Survey ends!" 
+    h1= "Matches" 
+    each val in matches
+        ul
+            p #{val.user} has match with count #{val.count}
+
     a(href="/") Go to main page

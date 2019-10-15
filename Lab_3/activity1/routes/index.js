@@ -13,13 +13,14 @@ router.get('/', function(req, res, next) {
       throw error
     }
     var file = filedata;
-    console.log(file);
+    console.log("text file data", file);
 
     fs.readFile('./data/comments.json', 'utf8', function(err, filedata){
       if (err){
         throw err;
       }
 
+      console.log("file data", filedata)
       if(filedata !== ""){
         var commentData =JSON.parse(filedata);
       }else {
@@ -31,6 +32,7 @@ router.get('/', function(req, res, next) {
           'comment': ''
         });
       }
+
       res.render('index', { 
           message: 'Welcome to Article Review System', 
           articleContent: file, 
@@ -93,8 +95,12 @@ router.post('/add', function(req,res,next){
                     'comment': req.body.comments
                   });
                 }else {
-                  // error = "Id already in use."
-                  throw "Id already in use.";
+                  console.log("duplicate ida")
+                  error = {
+                    message: "Invalid Id",
+                    status: "Id already in use."
+                  }
+                  res.render('adderror', {error: error});
                   
                 }
               }
@@ -107,7 +113,12 @@ router.post('/add', function(req,res,next){
            
           }else{
             // error = "Id or Comment should not be Empty."
-            throw new Error("Id or Comment should not be Empty.")
+            // throw new Error("Id or Comment should not be Empty.");
+            error = {
+              message: "Empty field",
+              status: "Id or Comment should not be Empty."
+            }
+            res.render('adderror', {error: error});
           }
           fs.writeFile('./data/comments.json', JSON.stringify(data), 'utf8', function(err){
             if(err){
@@ -131,9 +142,10 @@ router.post('/add', function(req,res,next){
           }
         });
       }
+      res.render('add');
       });
   }
-  res.render('add');
+
 });
 
 //post delete page 
@@ -168,9 +180,10 @@ router.post('/delete', function (req, res, next) {
   function deleteCallback(){
     fs.readFile('./data/comments.json', 'utf8', function(err, filedata){
       if(err){
-        throw err.message;
+        throw err;
       }
-      
+
+      console.log("file data", filedata)
       if(filedata !== ""){
         var data = JSON.parse(filedata);
         for (var key in data.commentsArray){
@@ -180,11 +193,20 @@ router.post('/delete', function (req, res, next) {
             if(index >-1){
               data.commentsArray.splice(index,1);
             }
+          }else {
+            error = {
+              message: "Invalid Id",
+              status: "Id does not Exist."
+            }
+            res.render('deleteerror', {error: error});
           }
         }
-        
       }else{
-        throw new Error("Cannot delete from an empty file.");
+        error = {
+          message: "File Empty",
+          status: "Cannot delete from an empty file."
+        }
+        res.render('deleteerror', {error: error});
       }
    
       console.log(JSON.stringify(data));
@@ -193,10 +215,13 @@ router.post('/delete', function (req, res, next) {
         if(err){
           throw err;
         }
+        console.log("inside delete write file ")
       });
+      res.render('delete');
     });
+    
   }
-  res.render('delete');
+   
 });
 
 //get view page 

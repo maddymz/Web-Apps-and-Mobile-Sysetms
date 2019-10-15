@@ -4,7 +4,7 @@ head
     link(rel="stylesheet", href='/stylesheets/style.css')
 body
     block content
-    h1= "This is set prefernces page!" + quesid
+    h1= "Preferences" + quesid
     div
         form(action="/questions/"+(quesid) method="POST")
             input(type="radio" name="horizontal")
