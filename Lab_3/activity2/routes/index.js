@@ -23,15 +23,14 @@ router.all('/questions/:id', function(req, res, next){
     var ques = JSON.parse(filedata);
     var pref = {}
     
+    // set user answer display preferences
     if('horizontal' in req.body){
       pref.horizontal = req.body.horizontal;
     }else if ('vertical' in req.body){
       pref.vertical = req.body.vertical;
     }
   
-    // console.log("query url : ", req.url.slice(11, 12));
     var pageId = req.url.slice(11,12);
-
 
     //prefill user info on login 
     MongoClient.connect(URL, {
@@ -40,20 +39,15 @@ router.all('/questions/:id', function(req, res, next){
       }, function(err, db){
         if (err) throw err;
   
-        // console.log("database  ", db.db('answers'));
         var dbo = db.db('answers');
         var collection = dbo.collection('userAnswers');
-        // console.log("dab collection", collection);
         if('match' in req.body && pageId == 1){
           req.session.username = req.body.username;
         }
-        console.log(" user name session", req.session.username);
+
         collection.findOne({username: req.session.username}, function(err, result, dbcallback){
           if(err) throw err;
-          // console.log("colecton", result);
-
           if(result != null && req.body.username === result.username){
-            // console.log("result" , result)
             req.session.username = result.username;
             req.session.answers.ans = result.answers;
             dbcallback();
@@ -61,10 +55,7 @@ router.all('/questions/:id', function(req, res, next){
             if("match" in req.body){
               req.session.username = req.body.username;
             }
-
-            console.log("page id ", pageId - 1);
-            // console.log(req.session.answers);
-        
+            console.log("page id ", pageId - 1);        
             if('next' in req.body && pageId == 1){
               req.session.answers.ans.push({
                 'qno': pageId -1 ,
@@ -83,7 +74,8 @@ router.all('/questions/:id', function(req, res, next){
                 });
               }
              }
-            //  console.log(req.session.answers);
+            
+
             //if id is greater than ques array length redirect to main page 
              if((pageId) > ques.questions.length){
                MongoClient.connect(URL,{
@@ -106,12 +98,9 @@ router.all('/questions/:id', function(req, res, next){
                 var count = 0;
              dbo.collection("userAnswers").find().toArray().then(function(doc){
                   console.log(doc);
-                  
-                  console.log(" req", req.session.answers.ans);
                   for(var i in doc){
                     for (var j in doc[i].answers){
-                      // console.log(" answres", doc[i].answers[j]);
-                      console.log(j , req.session.answers.ans[j])
+                      console.log( doc[i].username, j , req.session.answers.ans[j])
                       if(req.session.answers.ans[j].ans == doc[i].answers[j].ans){
                         count = count + 1;
                       }
@@ -142,7 +131,6 @@ router.all('/questions/:id', function(req, res, next){
           }
           
           function dbcallback(){
-            console.log("session name", req.session.username);
             //save user responses in persistence store - mongoDB
             if('next' in req.body){
              req.session.answers.ans.push({
