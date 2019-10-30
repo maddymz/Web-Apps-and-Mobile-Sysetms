@@ -27,18 +27,32 @@ var greetingElement = document.getElementById("content");
 greetingElement.innerHTML = data;
 var commentSubmitted = false;
 
-if (commentSubmitted == false){
-    window.setTimeout(function(){
-        console.log( dict.entries[5].answer[0]);
-        alert(dict.entries[5].answer[0]);
-    }, 5000);
-}
+var userName = document.getElementById('username').value;
+var greeting = document.getElementById('greeting');
+
+document.cookie = "name=" + userName;
+console.log("cookie", document.cookie);
+console.log("cookie", document.cookie.valueOf("name"));
+ 
+var cookieArr = document.cookie.valueOf("name").split("=");
+console.log(cookieArr)
+
+// if (commentSubmitted == false){
+//     window.setTimeout(function(){
+//         console.log( dict.entries[5].answer[0]);
+//         alert(dict.entries[5].answer[0]);
+//     }, 5000);
+// }
 
 function showGreeting(){
-    var userName = document.getElementById('username').value;
-    var greeting = document.getElementById('greeting');
-    greeting.innerHTML = "Welcome " + userName + " " + "to the movie review system. Please enter your comments!";
-    
+    // var cookieArr = document.cookie.valueOf("name").split("=");
+    // console.log(cookieArr)
+    if(cookieArr[1] == userName){
+        var message = "Welcome back " + userName +  " to the movie review system. Please enter your comments!";
+        alert(message);
+    }else {
+        greeting.innerHTML = "Welcome " + userName + " " + "to the movie review system. Please enter your comments!";
+    }
 }
 
 function submitComment(){
