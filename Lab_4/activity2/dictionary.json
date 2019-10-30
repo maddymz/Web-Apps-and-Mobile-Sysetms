@@ -1,0 +1,23 @@
+{
+    "dictionary_name": "default",
+    "entries":
+        [{
+            "key": ["stupid", "dumb", "idiot", "unintelligent", "simple-minded", "braindead", "foolish", "unthoughtful"],
+            "answer": ["educated", "informed", "schooled", "skilled", "trained", "logical", "rational", "reasonable", "valid"]
+        }, {
+            "key": ["unattractive", "hideous", "ugly"],
+            "answer": ["attractive", "beauteous", "beautiful", "lovely", "pretty", "ravishing"]
+        }, {
+            "key": ["ambiguous", "cryptic", "dark", "nebulous", "obscure", "unintelligible"],
+            "answer": ["obvious", "plain", "unambiguous", "understandable", "unequivocal"]
+        }, {
+            "key": ["incapable", "incompetent", "inept", "unable", "unfit", "unqualified", "weak", "artless"],
+            "answer": ["accomplished", "fit", "adept", "complete", "consummate"]
+        }, {
+            "key": ["emotionless", "heartless", "unkind", "mean", "selfish", "evil"],
+            "answer": ["benevolent", "benignant", "gentle", "kind", "clement"]
+        }, {
+            "key": ["idle"],
+            "answer": ["Can you reply something?", "You have been idle for more than 30 seconds", "Whats the matter with you? Submit something"]
+        }]
+}
