@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <head>
     <meta charset="utf-8">
     <title>Activity 2</title>
@@ -10,7 +8,7 @@
     <form id="userForm">
         <label for ="username">Enter your name: </label>
         <input type="text" id="username">
-        <input type="button" value = "Submit" id = "submitButton" onclick="showGreeting()">
+        <input type="button" value = "Submit" id = "submitButton" onclick="submitUsername()">
         <div id="greeting"></div> 
     </form>
 
@@ -19,7 +17,7 @@
         </p>
         <label>Enter Your comments here: </label>
         <textarea id="commentBox"></textarea>
-        <button id = "submitComment" id = "CommentButton" onclick="submitComment()">Submit</button>
+        <button id = "submitComment" onclick="submitComment()">Submit</button>
     </div>
 
     <script src="index.js"></script>

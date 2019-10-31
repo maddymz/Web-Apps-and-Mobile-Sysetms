@@ -23,19 +23,11 @@ var dict = {
 }
 
 var data = " Feugiat pretium nibh ipsum consequat nisl vel pretium lectus. Id consectetur purus ut faucibus. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Et sollicitudin ac orci phasellus egestas tellus. Augue neque gravida in fermentum et sollicitudin ac orci phasellus. Tempus urna et pharetra pharetra massa massa ultricies mi. Nisl purus in mollis nunc sed id semper risus in. Suspendisse interdum consectetur libero id faucibus nisl tincidunt eget. Mattis molestie a iaculis at. Vel turpis nunc eget lorem. Eu scelerisque felis imperdiet proin fermentum leo vel orci. Libero enim sed faucibus turpis in eu mi bibendum. Adipiscing diam donec adipiscing tristique. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci. Sem nulla pharetra diam sit amet nisl suscipit adipiscing bibendum. Proin nibh nisl condimentum id venenatis a condimentum vitae.";
-var greetingElement = document.getElementById("content");
-greetingElement.innerHTML = data;
+var getContentElement = document.getElementById("content");
+getContentElement.innerHTML = data;
 var commentSubmitted = false;
+var userNameSubmitted = false;
 
-var userName = document.getElementById('username').value;
-var greeting = document.getElementById('greeting');
-
-document.cookie = "name=" + userName;
-console.log("cookie", document.cookie);
-console.log("cookie", document.cookie.valueOf("name"));
- 
-var cookieArr = document.cookie.valueOf("name").split("=");
-console.log(cookieArr)
 
 // if (commentSubmitted == false){
 //     window.setTimeout(function(){
@@ -43,28 +35,47 @@ console.log(cookieArr)
 //         alert(dict.entries[5].answer[0]);
 //     }, 5000);
 // }
-
-function showGreeting(){
-    // var cookieArr = document.cookie.valueOf("name").split("=");
-    // console.log(cookieArr)
-    if(cookieArr[1] == userName){
-        var message = "Welcome back " + userName +  " to the movie review system. Please enter your comments!";
-        alert(message);
-    }else {
-        greeting.innerHTML = "Welcome " + userName + " " + "to the movie review system. Please enter your comments!";
+function setCookie(name , userSubmitted, nameValue){
+    if (userSubmitted){
+        document.cookie = name + "=" + nameValue;            
     }
 }
 
-function submitComment(){
+function getCookie(cookieName){
+    var cName = cookieName + "=";
+    var cArray = document.cookie.split(";");
+    for (val in cArray){
+        var c = aArray[i];
+        while(c.charAt(0) == ' '){
+            c = c.subString(1);
+        } 
+        if(c.indexOf(cName) == 0){
+            return c.subString(cName.length, c.length);
+        }       
+    }
+
+    return "";
+}
+function submitUsername() {
+    userNameSubmitted = true;
+    var userName = document.getElementById('username').value;
+    var greeting = document.getElementById('greeting');
+    console.log("username after submit ", userName);
+    greeting.innerHTML = "Welcome " + userName + " " + "to the movie review system. Please enter your comments!";
+
+    setCookie("username", userSubmitted, userName);
+}
+
+function submitComment() {
     commentSubmitted = true;
     var commentVlaue = document.getElementById('commentBox').value;
     console.log("comment value ", commentVlaue);
-    
-    
-    for (i in dict.entries){
+
+
+    for (i in dict.entries) {
         console.log(dict.entries[i].key[i]);
         console.log(dict.entries[i].answer[i]);
-        if (commentVlaue.includes(dict.entries[i].key[i])){
+        if (commentVlaue.includes(dict.entries[i].key[i])) {
             console.log("true")
             commentVlaue.replace(dict.entries[i].key[i], dict.entries[i].answer[i]);
 
