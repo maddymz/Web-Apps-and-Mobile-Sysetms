@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <script src="convert.js"></script>
+</head>
+
+<body>
+    <div id= "weightInputBox" style="display: inline-block;">
+        <input type="text" id="inputWeight" placeholder="Enter Weight">
+        <select id="inputOpMenu">
+            <option value="metricTone">Metric ton</option>
+            <option value="kg">Kilogram</option>
+            <option value="grm">Gram</option>
+            <option value="miligrm">Milligram</option>
+            <option value="micorgrm">Microgram</option>
+            <option value="impTon">Imperial ton</option>
+            <option value="usTon">US ton</option>
+            <option value="stone">Stone</option>
+            <option value="pound">Pound</opttion>
+            <opttion value="ounce">Ounce</opttion>
+        </select>
+        <label>=</label><p id ="output"> Output</p>
+        <select id = "outputOpMenu">
+            <option value="miligrm">Milligram</option>
+        </select>
+        <button id="submit" value="convert" onclick="convert()">convert</button>
+
+    </div>
+</body>
