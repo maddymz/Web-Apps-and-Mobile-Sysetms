@@ -29,13 +29,17 @@ var data = " Feugiat pretium nibh ipsum consequat nisl vel pretium lectus. Id co
 var commentSubmitted = false;
 var userNameSubmitted = false;
 
-
-// if (commentSubmitted == false){
-//     window.setTimeout(function(){
-//         console.log( dict.entries[5].answer[0]);
-//         alert(dict.entries[5].answer[0]);
-//     }, 5000);
-// }
+var idleMsg = dict.entries[5].answer.slice(0)
+if (commentSubmitted == false){
+    window.setTimeout(function(){
+        console.log( dict.entries[5].answer[0]);
+        if(idleMsg.length == 0){
+            idleMsg = dict.entries[5].answer.slice(0)
+        }
+        messg = idleMsg.pop()
+        alert(messg);
+    }, 5000);
+}
 
 window.onload = () => {
     userComesBack();
@@ -59,19 +63,13 @@ function setCookie(name , userSubmitted, nameValue){
  */
 function getCookie(cookieName){
     var cName = cookieName + "=";
-    console.log(cName)
     var cArray = document.cookie.split(";");
-    console.log(cArray)
     for (val in cArray){
         var c = cArray[val];
-        console.log(c)
         while(c.charAt(0) == ' '){
-            console.log("in while")
             c = c.substring(1);
         } 
         if(c.indexOf(cName) == 0){
-            console.log("in indexOf")
-            console.log(c.substring(cName.length, c.length))
             return c.substring(cName.length, c.length);
         }       
     }
@@ -112,7 +110,6 @@ function displayContent(userName){
 function submitUsername() {
     userNameSubmitted = true;
     var userName = document.getElementById('username').value;
-    
     console.log("username after submit ", userName);
     if(userName != ''){
         var savedUser = getCookie('username')
@@ -121,9 +118,80 @@ function submitUsername() {
         }
         displayContent(userName);
         setCookie("username", userNameSubmitted, userName);
-
     }
-    
+}
+/**
+ * 
+ * @param {*} commentValue 
+ * Function to parse comment
+ */
+function parseComment(commentValue){
+    var cleanString = commentValue.replace(/\n+/g, " ");
+    var commentArr = cleanString.split(' ');
+    commDict = {}
+    for (i in commentArr){
+        commDict[i] = commentArr[i]
+    }
+    if(Object.values(commDict).includes("")){
+        var arr = Object.values(commDict)
+        delete commDict[arr.indexOf("")];
+    }
+
+    var parsedString = {
+        "0": cleanString,
+        "1": commentArr, 
+        "2": commDict 
+    }
+
+    return parsedString;
+}
+
+/**
+ * @author Madhukar Raj
+ * @param {*} obj
+ * function to replace the refrained key words 
+ */
+
+function replaceKeyWords(obj){
+    for (i in dict.entries){
+        var goodWords = dict.entries[i].answer.slice(0);
+        for (j in obj[2]){
+            if(dict.entries[i].key.includes(obj[2][j])){
+                if(goodWords.length == 0){
+                    goodWords = dict.entries[i].answer.slice(0);
+                }
+                var replacementWrd = goodWords.pop();
+               var censoredStr =  obj[0].replace(obj[2][j], replacementWrd);
+               obj[0] = censoredStr;
+            }
+        }
+    }
+    console.log("censored:", obj[0]);
+}
+
+function checkValidJson(obj){
+    console.log(obj[0]);
+    console.log(obj[0]['stupid']);
+    var t = JSON.stringify(obj[0]);
+    // var t = obj[0];
+    console.log(t)
+    var m = t.match(/\"\{.*\:.*\}\"/g);
+    console.log(m)
+    if(m == null){
+        alert("not a valid json!!");
+    }else{
+        var parJs = JSON.parse(obj[0]);
+        for(i in dict.entries){
+            for (j in dict.entries[i].key){
+                if (dict.entries[i].key[j] in parJs){
+                    dict.entries[i].answer.push(parJs[dict.entries[i].key[j]]);
+                }
+            }
+        }
+
+        alert("Word added to dictionary and \n the dictionary is smarter ");
+    }
+    console.log(dict);
 }
 /**
  * @method submitComment()
@@ -133,36 +201,9 @@ function submitUsername() {
 function submitComment() {
     commentSubmitted = true;
     var commentValue = document.getElementById('commentBox').value;
-    console.log("comment value ", commentValue);
-    var cleanString = commentValue.replace(/\n+/g, " ");
-    var commentArr = cleanString.split(' ');
-    console.log(commentArr);
-    commDict = {}
-    for (i in commentArr){
-        commDict[i] = commentArr[i]
-    }
-    if(Object.values(commDict).includes("")){
-        var arr = Object.values(commDict)
-        delete commDict[arr.indexOf("")];
-    }
-    
-    console.log(commDict);
-    var comVal = Object.values(commDict);
-    for (i in dict.entries){
-        var goodWords = dict.entries[i].answer.slice(0);
-        for (j in comVal){
-            if(dict.entries[i].key.includes(comVal[j])){
-                var replacementWrd = goodWords.pop();
-                console.log(replacementWrd)
-                var t1 = dict.entries[i].key[j]
-                var t2 = commDict[j]
-                console.log(t1, t2);
-               var censoredStr =  cleanString.replace(commDict[j], replacementWrd);
-               cleanString = censoredStr;
-            }
-        }
-    }
-    console.log("censored", censoredStr);
+    var commObj = parseComment(commentValue)
+    replaceKeyWords(commObj);
+    checkValidJson(commObj);
+   
 }
 
-console.log("dictionary", dict);
