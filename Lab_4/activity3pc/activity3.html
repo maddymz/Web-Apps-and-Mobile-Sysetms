@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Activity 2</title>
+</head>
+
+<body>
+    <form id="userForm">
+        <label for ="username">Enter your name: </label>
+        <input type="text" id="username">
+        <input type="button" value = "Submit" id = "submitButton" onclick="submitUsername()">
+        <div id="greeting"></div> 
+    </form>
+
+    <div id="movieContent">
+        <p id="content">
+        </p>
+        <label>Enter Your comments here: </label>
+        <textarea id="commentBox"></textarea>
+        <button id = "submitComment" onclick="submitComment()">Submit</button>
+    </div>
+    <div id="historyView">
+        <ul>
+            <li id= "history"></li>
+        </ul>
+       
+    </div>
+
+    <script src="index.js"></script>
+</body>
