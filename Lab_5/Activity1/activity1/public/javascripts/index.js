@@ -40,19 +40,14 @@ function convertToEuro(){
     request.onreadystatechange = function () {
         if(request.readyState == XMLHttpRequest.DONE){
             if(request.status == 200){
-                console.log(request.responseText);
+                console.log("response", request.responseText);
                 var response = JSON.parse(request.responseText);
                 var stack = response.activity;
                 document.getElementById('currency').innerHTML = response.euro;
-                // var userOperation = 'Operand' +' ' +  data.usd +' ' +  'was converted from USD' + ' '+ response.euro +' '+ 'EURO'+ ' ' + 'IP' + ' ' +response.ip +' '+  response.userAgent;
-                // stack.push(userOperation);
-                // var item = stack.pop();
                 for (var val in stack){
                     var historyList = '<li>' + stack[val] + '</li>';
                 document.getElementById('activityHistory').innerHTML += historyList;
                 }
-                // var historyList = '<li>' + item + '</li>';
-                // document.getElementById('userActivity').innerHTML += historyList;
                 console.log("euro", stack);
             }else{
                 console.log("server error");

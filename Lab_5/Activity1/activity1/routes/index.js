@@ -7,13 +7,6 @@ var historyStack = {
   'history': [],
   'activity': []
 }
-// var appState = [];
-/* GET home page. */
-
-
-/**
- * 
- */
 
 router.get('/', function(req, res, next) {
   res.sendFile(path.join('/public/javascripts/index.html'));
