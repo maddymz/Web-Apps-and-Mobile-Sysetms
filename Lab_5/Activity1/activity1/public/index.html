@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Lab 5
+    </title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div>
+        Currency value: <p id="currency"></p>
+        Enter value:<input type="text" id="usd" placeholder="input value" ></br></br>
+        
+        <button id="euro" disabled onclick="convertToEuro()">Euro</button>
+        <button id="pound" disabled onclick="convertToPound()">Pound</button>
+        <button id="pop" onclick="performPop()">Pop</button>
+        <button id="history" onclick="showHistory()">History</button>
+        <button id="reset" onclick="reset()">Reset</button>
+    </div>
+    <div id ="userActivity">
+    </div>
+    <div id ="activityHistory">
+    </div>
+    <script src="javascripts/index.js"></script>
+</body>
