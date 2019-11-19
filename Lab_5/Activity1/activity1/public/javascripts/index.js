@@ -29,7 +29,7 @@ input.addEventListener('keyup', validateInput);
  * @method 
  * 
  */
-function convertToEuro(){
+function convertToEuro() {
     var usdValue = document.getElementById('usd').value;
     var data = {
         'usd': usdValue
@@ -38,27 +38,30 @@ function convertToEuro(){
     request.open('POST', url, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     request.onreadystatechange = function () {
-        if(request.readyState == XMLHttpRequest.DONE){
-            if(request.status == 200){
+        if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.status == 200) {
                 console.log("response", request.responseText);
                 var response = JSON.parse(request.responseText);
                 var stack = response.activity;
                 document.getElementById('currency').innerHTML = response.euro;
-                for (var val in stack){
-                    var historyList = '<li>' + stack[val] + '</li>';
-                document.getElementById('activityHistory').innerHTML += historyList;
+                if (stack.length > 0) {
+                    document.getElementById('reset').removeAttribute('disabled');
+                    var item = stack.pop();
+                    var historyList = '<li>' + item + '</li>';
+                    document.getElementById('activityHistory').innerHTML += historyList;
                 }
+
                 console.log("euro", stack);
-            }else{
+            } else {
                 console.log("server error");
             }
-        } 
+        }
     }
-   
+
     request.send(JSON.stringify(data));
 }
 
-function convertToPound(data){
+function convertToPound(data) {
     var usdValue = document.getElementById('usd').value;
     var data = {
         'usd': usdValue
@@ -67,56 +70,49 @@ function convertToPound(data){
     request.open('POST', url, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     request.onreadystatechange = function () {
-        if(request.readyState == XMLHttpRequest.DONE){
-            if(request.status == 200){
-                document.getElementById('userActivity').hidden = true;
+        if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.status == 200) {
+                document.getElementById('userActivity').innerHTML = '';
                 console.log(request.responseText);
                 var response = JSON.parse(request.responseText);
                 var stack = response.activity;
-                if(stack.length > 0){
-                    document.getElementById('reset').removeAttribute('disabled');
-                }
                 document.getElementById('currency').innerHTML = response.pound;
-                // var userOperation = 'Operand' +' '+  data.usd +' ' + 'was converted from USD' + ' ' + response.pound +' '+ 'POUND'+ ' '+ 'IP' + ' ' +response.ip +' ' + response.userAgent;
-                // stack.push(userOperation);
-                // var item = stack.pop();
-                for (var val in stack){
-                    var historyList = '<li>' + stack[val] + '</li>';
-                document.getElementById('activityHistory').innerHTML += historyList;
+                if (stack.length > 0) {
+                    document.getElementById('reset').removeAttribute('disabled');
+                    var item = stack.pop();
+                    var historyList = '<li>' + item + '</li>';
+                    document.getElementById('activityHistory').innerHTML += historyList;
                 }
                 console.log("pound", stack);
-            }else{
+            } else {
                 console.log("server error");
             }
-        } 
+        }
     }
-   
+
     request.send(JSON.stringify(data));
 }
 
-function performPop(){
+function performPop() {
+    document.getElementById('activityHistory').innerHTML = '';
+    document.getElementById('userActivity').innerHTML = '';
     var request = new XMLHttpRequest();
     var url = "http://localhost:8008/pop";
     request.open('GET', url, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    request.onreadystatechange = function() {
-        if(request.readyState == XMLHttpRequest.DONE){
-            if (request.status == 200){
+    request.onreadystatechange = function () {
+        if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.status == 200) {
                 console.log(request.responseText)
                 var response = JSON.parse(request.responseText);
                 var stack = response.activity;
-                if(stack.length > 0){
-                    document.getElementById('reset').removeAttribute('disabled');
+                for (var val in stack) {
+                    var activityList = '<li>' + stack[val] + '</li>';
+                    document.getElementById('userActivity').innerHTML += activityList;
                 }
-                console.log("pop", response);
-                for (var val in stack){
-                    var historyList = '<li>' + stack[val] + '</li>';
-                document.getElementById('activityHistory').innerHTML += historyList;
-                }
-                console.log("pound", stack);
-                
+                console.log("pop", stack);
 
-            }else{
+            } else {
                 console.log("error")
             }
         }
@@ -124,23 +120,24 @@ function performPop(){
     request.send();
 }
 
-function showHistory(){
+function showHistory() {
+    document.getElementById('activityHistory').innerHTML = '';
     var request = new XMLHttpRequest();
     var url = "http://localhost:8008/history";
     request.open('GET', url, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    request.onreadystatechange = function() {
-        if(request.readyState == XMLHttpRequest.DONE){
-            if (request.status == 200){
+    request.onreadystatechange = function () {
+        if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.status == 200) {
                 console.log(request.responseText)
                 document.getElementById('userActivity').hidden = true;
                 var response = JSON.parse(request.responseText);
                 var stack = response.history;
-                for (var val in stack){
+                for (var val in stack) {
                     var historyList = '<li>' + stack[val] + '</li>';
-                document.getElementById('activityHistory').innerHTML += historyList;
+                    document.getElementById('activityHistory').innerHTML += historyList;
                 }
-            }else{
+            } else {
                 console.log("error")
             }
         }
@@ -148,14 +145,14 @@ function showHistory(){
     request.send();
 }
 
-function reset(){
+function reset() {
     var request = new XMLHttpRequest();
     var url = "http://localhost:8008/reset";
     request.open('GET', url, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    request.onreadystatechange = function() {
-        if(request.readyState == XMLHttpRequest.DONE){
-            if (request.status == 200){
+    request.onreadystatechange = function () {
+        if (request.readyState == XMLHttpRequest.DONE) {
+            if (request.status == 200) {
                 console.log(request.responseText)
                 document.getElementById('userActivity').innerHTML = '';
                 document.getElementById('activityHistory').innerHTML = '';
@@ -164,7 +161,7 @@ function reset(){
                 document.getElementById("pound").setAttribute("disabled", "disabled");
                 document.getElementById("currency").innerHTML = 0;
                 document.getElementById("usd").value = 0;
-            }else{
+            } else {
                 console.log("error")
             }
         }

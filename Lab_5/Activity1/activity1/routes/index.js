@@ -17,16 +17,15 @@ router.post('/euro', function (req, res, next) {
   var userAgent = req.headers['user-agent'];
   var ipAddress = req['_remoteAddress'];
   console.log(req.headers['user-agent']);
-  // data = JSON.parse(req.body)
   var usd = req.body.usd
-  // USD = 100;
   var euro = 0.9 * usd;
   
   var userOperation = 'Operand' +' '+  usd +' ' + 'was converted from USD' + ' ' + euro +' '+ 'EURO'+ ' '+ 'IP' + ' ' + ipAddress +' ' + userAgent;
   historyStack.history.push(userOperation);
   historyStack.activity.push(userOperation);
+
   var resJson = {
-    "euro": euro,
+    "euro": euro + " in EURO",
     "userAgent": userAgent,
     "ip": ipAddress,
     "activity": historyStack.activity
@@ -56,7 +55,7 @@ router.post('/pound', function (req, res, next) {
   historyStack.history.push(userOperation);
   historyStack.activity.push(userOperation);
   var resJson = {
-    "pound": pound,
+    "pound": pound + " in POUND",
     "userAgent": userAgent,
     "ip": ipAddress,
     "activity": historyStack.activity
@@ -124,6 +123,8 @@ router.get('/reset', function(req,res){
     console.log("reset stack", data);
     data.history.length = 0;
     data.activity.length = 0;
+    historyStack.activity.length = 0;
+    historyStack.history.length = 0;
     console.log("reset", data)
 
     fs.writeFile('../history.json',JSON.stringify(data), 'utf8', function(err){
