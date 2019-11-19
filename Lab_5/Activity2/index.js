@@ -1,4 +1,4 @@
-var refresh = false;
+localStorage.setItem('ref', false);
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
@@ -42,8 +42,12 @@ function getDetails() {
                     opt.value = data[i].name;
                     dropdown.options.add(opt);
                 }
-                if (refresh != true) {
-                    dropdown.addEventListener('change', function () {
+
+
+                dropdown.addEventListener('change', function () {
+                    var refreshVal = localStorage.getItem('ref');
+                    console.log("refresh", refreshVal);
+                    if (refreshVal != "true") {
                         var selectedVal = dropdown.options[dropdown.selectedIndex].value;
                         var rowCount = document.getElementById('table').getElementsByTagName("tr").length;
                         if (rowCount > 3) {
@@ -66,8 +70,10 @@ function getDetails() {
                                 row.innerHTML = tableRow;
                             }
                         }
-                    })
-                }
+                    }
+
+                })
+
 
 
                 const keys = Object.keys(issues);
@@ -93,18 +99,23 @@ function getDetails() {
     }
 }
 
-function refresh() {
+function refreshTable() {
     var rowCount = document.getElementById('table').getElementsByTagName("tr").length;
     var table = document.getElementById('table');
     for (var i = 1; i < rowCount; i++) {
         var row = table.rows[i];
         row.innerHTML = '';
     }
-    refresh = true;
-    refreshCall();
+    // var refresh = false;
+    // localStorage.setItem('ref', false);
+    console.log(refresh);
+    document.getElementById('dropdown').innerHTML = '';
+    refreshCall(refresh);
 }
 
-function refreshCall() {
+function refreshCall(refresh) {
+    // refresh = true;
+    localStorage.setItem('ref', true);
     var username = document.getElementById("userName").value;
     if (username == '') {
         alert("please enter a valid username");
