@@ -4,7 +4,7 @@ function getKeyByValue(object, value) {
 function getBranchDetails(data){
   const url = data
 }
-function getDetails(){
+function getUserDetails(){
     var username = document.getElementById("userName").value;
     const url = 'https://api.github.com/users/' + username + '/repos';
     fetch(url)
@@ -14,7 +14,6 @@ function getDetails(){
         var issues = {};
         var sum = 0;
         for (var val in data){
-        
         if (val < 2){
             issues[data[val].name] = data[val].open_issues_count;
             var row = document.getElementById('table').insertRow()
@@ -43,11 +42,11 @@ function getDetails(){
        
         dropdown.addEventListener('change', function(){
             var selectedVal = dropdown.options[dropdown.selectedIndex].value;
-            console.log(selectedVal);
-            var rows = document.getElementById('table').getElementsByTagName("tr").length;
-            if(rows > 3){
-                document.getElementById('table').deleteRow(3);
+            var rowCount = document.getElementById('table').getElementsByTagName("tr").length;
+            if(rowCount > 3){
+                document.getElementById('table').deleteRow(3);  
             }
+            console.log(selectedVal);
             for (var val in data){
                 if(String(data[val].name) == selectedVal){
                     issues[data[val].name] = data[val].open_issues_count;
