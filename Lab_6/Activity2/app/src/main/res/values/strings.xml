@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">BattleShip</string>
+    <string name="placeholder">Please enter your name</string>
+    <string name="submit">Submit</string>
+    <string name="web_view_title">Battleship</string>
+</resources>
